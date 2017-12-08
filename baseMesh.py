@@ -183,13 +183,12 @@ loc = "system"
 obj = "blockMeshDict"
 tipos = {}
 bcs = "inlet outlet front back down up".split(" ")
-####selezione tipi e facce
 print("\n--> Selection of BCs")
 for bc in bcs:
     q = "    - {}\t: ".format(bc)
     tipos[bc] = input(q).strip()
 
-########################
+######################## This could be in a function 
 #Geometry specifications
 print("\n--> Geometry definition")
 a = float((input("   - Longitudinal length (x): ").strip()))
