@@ -114,9 +114,9 @@ def Geometry():
     fid.write("(\n")
     #dir x
     for i in list(range(2)):
-        fid.write("\t{}\n".format(bcs[i]))
+        fid.write("\t{}\n".format(face[i]))
         fid.write("\t{\n")
-        fid.write("\t\ttype {};\n".format(tipos[bcs[i]]))
+        fid.write("\t\ttype {};\n".format(typos[face[i]]))
         fid.write("\t\tfaces\n")
         fid.write("\t\t(\n")
         fid.write("\t\t({} {} {} {})\n".format(Ixyz[i], Ixyz[i]+int(0.5*Nnod)-1-2*i , Ixyz[i]+int(0.5*Nnod), Ixyz[i]+int(Nnod)-1-2*i ))
@@ -136,9 +136,9 @@ def Geometry():
         elif i ==1:
             ss = ss2
             strin = st.format(a=ss[0],b=ss[1],d=ss[2],c=ss[3])
-        fid.write("\t{}\n".format(bcs[i+2]))
+        fid.write("\t{}\n".format(face[i+2]))
         fid.write("\t{\n")
-        fid.write("\t\ttype {};\n".format(tipos[bcs[i+2]]))
+        fid.write("\t\ttype {};\n".format(typos[face[i+2]]))
         fid.write("\t\tfaces\n")
         fid.write("\t\t(\n")    
         fid.write(strin)         
@@ -154,9 +154,9 @@ def Geometry():
             ss = []        
             for j in list(range(int(0.5*Nnod))):
                 ss.append(Ixyz[j+int(0.5*Nnod)*i])
-            fid.write("\t{}\n".format(bcs[i+4]))
+            fid.write("\t{}\n".format(face[i+4]))
             fid.write("\t{\n")
-            fid.write("\t\ttype {};\n".format(tipos[bcs[i+4]]))
+            fid.write("\t\ttype {};\n".format(typos[face[i+4]]))
             fid.write("\t\tfaces\n")
             fid.write("\t\t(\n")    
             fid.write(st.format(a=ss[0],b=ss[1],c=ss[2],d=ss[3]))
@@ -181,19 +181,24 @@ def Geometry():
 cl = "dictionary"
 loc = "system"
 obj = "blockMeshDict"
-tipos = {}
-bcs = "inlet outlet front back down up".split(" ")
+bcs = "faceX0 faceX+ faceY0 faceY+ faceZ0 faceZ+".split(" ")
+face = []
+typos = {}
 print("\n--> Selection of BCs")
-for bc in bcs:
-    q = "    - {}\t: ".format(bc)
-    tipos[bc] = input(q).strip()
 
+for bc in bcs:
+    q1 = "    - Assign a name for the face {}\t: ".format(bc)
+    face.append(input(q1).strip())
+    f = face[-1]
+    q2 = "    - Set a BC type for the face {}\t: ".format(f)
+    typos[f] = input(q2).strip() 
+    
 ######################## This could be in a function 
 #Geometry specifications
 print("\n--> Geometry definition")
-a = float((input("   - Longitudinal length (x): ").strip()))
-b = float((input("   - Transversal  length (y): ").strip()))
-H = float((input("   - Vertical     length (z): ").strip()))
+a = float((input("   - X total length: ").strip()))
+b = float((input("   - Y total length: ").strip()))
+H = float((input("   - Z total length: ").strip()))
 
 print("\n--> Position of lower vertex:")
 c1 = float((input("     - x0 = ").strip()))
