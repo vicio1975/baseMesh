@@ -14,7 +14,7 @@ def headerLines(cl,loc,obj,con="convertToMeters 1;"):
     "/*--------------------------------*- C++ -*----------------------------------*\\",
     "| =========                 |                                                 |",
     "| \\\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |",
-    "|  \\\    /   O peration     | Version:  v4.x                                  |",
+    "|  \\\    /   O peration     | Version:  v1812                                 |",
     "|   \\\  /    A nd           | Web:      www.OpenFOAM.com                      |",
     "|    \\\/     M anipulation  |                                                 |",
     "\*---------------------------------------------------------------------------*/",
